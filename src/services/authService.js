@@ -2,9 +2,11 @@ const userModel = require('../model/userModel');
 const validate = require('../helpers/validationError');
 const _ = require('lodash');
 const func = require('../config').response;
+const jwtKey = require('../config').jwtKey;
 const bycrypt = require('bcrypt');
 const errRes = _.cloneDeep(func.badRequest);
 const succRes = _.cloneDeep(func.created);
+const jwt = require('jsonwebtoken');
 const signUpService = (body) => {
 	return new Promise(async (resolve, reject) => {
 		let newUser = new userModel(body);
@@ -29,4 +31,30 @@ const signUpService = (body) => {
 		});
 	});
 };
-module.exports = { signUpService };
+
+const loginService = (body) => {
+	return new Promise(async (resolve) => {
+		const { email, password } = body;
+		console.log(body);
+		if (!email || !password) {
+			errRes['msg'] = 'credentials required !';
+			return resolve(errRes);
+		}
+		userModel.findOne({ email }, async (err, doc) => {
+			if (err) {
+				return resolve(errRes);
+			}
+			const isMatch = bycrypt.compareSync(password, doc.password);
+			if (!isMatch) {
+				errRes['msg'] = 'invalid credentials';
+				return resolve(errRes);
+			}
+			let token = await jwt.sign({ uid: doc._id }, jwtKey);
+
+			succRes.data = { token };
+			return resolve(succRes);
+		});
+	});
+};
+
+module.exports = { signUpService, loginService };

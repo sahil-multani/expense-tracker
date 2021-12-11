@@ -4,6 +4,8 @@ const responseConstants = require('../constant/responseConstants');
 module.exports = {
 	url: urlConstants,
 	response: responseConstants,
+	jwtKey:
+		'dhkjhfskfeodhkjhfskfeodhkjhfskfeodhkjhfskfeodhkiudfhgggs,nfsdkjhfskfeodhkjhfskfiudfhgggs,nfsdk',
 	connectDB: () => {
 		mongoose
 			.connect(urlConstants.DB_URL, {
