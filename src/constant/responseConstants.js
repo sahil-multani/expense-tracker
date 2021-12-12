@@ -1,11 +1,11 @@
 module.exports = {
 	sucess: {
-		sucess: true,
+		success: true,
 		statusCode: 200,
 		data: [],
 	},
 	created: {
-		sucess: true,
+		success: true,
 		statusCode: 201,
 		data: [],
 	},
@@ -17,5 +17,10 @@ module.exports = {
 		success: false,
 		statusCode: 500,
 		msg: 'something went wrong ',
+	},
+	invalidToken: {
+		success: false,
+		statusCode: 401,
+		msg: 'invalid auth token',
 	},
 };
