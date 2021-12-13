@@ -7,7 +7,7 @@ const url = {
 	LOGIN: '/login',
 
 	//expense
-	CREATE_EXPENSE: '/create',
+	GET_EXPENSE: '/get',
 };
 
 module.exports = url;

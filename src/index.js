@@ -9,11 +9,15 @@ app.use(morgan('dev'));
 
 const cors = require('cors');
 const auth = require('./routes/authRoutes');
+const expense = require('./routes/expenseRoute');
 app.use(cors());
 app.use(express.json());
-app.use('/auth', auth);
+
 const scheduleCreateExpense = require('./helpers/scheduler');
 scheduleCreateExpense();
+
+app.use('/auth', auth);
+app.use('/expense', expense);
 
 const port = process.env.PORT || 3001;
 
