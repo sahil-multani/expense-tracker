@@ -17,7 +17,7 @@ const verfiyToken = async (req, res, next) => {
 		}
 
 		userModel.findOne({ _id: decoded.uid }, (err, doc) => {
-			if (err || !doc) return resolve(invalidToken);
+			if (err || !doc) return res.send(invalidToken);
 			req.body.userId = decoded.uid;
 
 			return next();

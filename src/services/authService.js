@@ -7,6 +7,7 @@ const bycrypt = require('bcrypt');
 const errRes = _.cloneDeep(func.badRequest);
 const succRes = _.cloneDeep(func.created);
 const jwt = require('jsonwebtoken');
+const expenseModel = require('../model/expenseModel');
 const signUpService = (body) => {
 	return new Promise(async (resolve, reject) => {
 		let newUser = new userModel(body);
@@ -24,9 +25,24 @@ const signUpService = (body) => {
 					}
 
 					return resolve(func.serverError);
-				} else {
-					return resolve(succRes);
 				}
+				const expense = new expenseModel({
+					userId: doc._id,
+					expense: [
+						{
+							laundry: { quantity: 0, cost: 0 },
+							breakFast: true,
+							lunch: true,
+							dinner: true,
+						},
+					],
+				});
+
+				expense.save((err, expenseDoc) => {
+					if (err) return resolve(err);
+					return resolve(expenseDoc);
+				});
+				// return resolve(succRes);
 			});
 		});
 	});
