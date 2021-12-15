@@ -13,8 +13,7 @@ const expense = require('./routes/expenseRoute');
 app.use(cors());
 app.use(express.json());
 
-const scheduleCreateExpense = require('./helpers/scheduler');
-scheduleCreateExpense();
+require('./helpers/scheduler');
 
 app.use('/auth', auth);
 app.use('/expense', expense);

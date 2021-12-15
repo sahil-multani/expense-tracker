@@ -12,20 +12,21 @@ const createDailyExpense = () => {
 
 			await expenseDoc.save((err, doc) => {
 				if (err) return console.log(err);
-				console.log(doc);
+				// console.log(doc);
 			});
 		});
-		console.log(expenseDocs);
+		// console.log(expenseDocs);
 		return;
 	});
 };
 
 const scheduleCreateExpenses = () => {
 	console.log('scheduler config set to call at 00:00');
-	cron.schedule('0 0 * * *', () => {
+	cron.schedule('59 23 * * *', () => {
 		console.log('everyday at 00:00');
 		createDailyExpense();
 	});
 };
+createDailyExpense();
 
-module.exports = scheduleCreateExpenses;
+scheduleCreateExpenses();

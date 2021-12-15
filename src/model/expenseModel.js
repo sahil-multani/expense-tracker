@@ -7,8 +7,10 @@ const expenseTrackerSchema = new Schema({
 	expense: [
 		{
 			laundry: {
-				quantity: { type: Number, default: 0, required: true },
-				cost: { type: Number, default: 0, required: true },
+				quantity: { type: Number, default: 1, required: true },
+				cost: {
+					type: Number,
+				},
 			},
 			breakFast: { type: Boolean, default: true, required: true },
 			lunch: { type: Boolean, default: true, required: true },
@@ -19,6 +21,15 @@ const expenseTrackerSchema = new Schema({
 	],
 });
 
+expenseTrackerSchema.pre('save', function (next) {
+	let { quantity } = this.expense[0];
+	// if (quantity) {
+	this.expense[0].cost = quantity * 15;
+	// }
+
+	console.log(`this ::=>>>>>>>>>>>>>`, this.expense[0]);
+	next();
+});
 const expenseModel = mongoose.model('expenses', expenseTrackerSchema);
 
 module.exports = expenseModel;
