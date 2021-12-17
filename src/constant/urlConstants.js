@@ -8,6 +8,7 @@ const url = {
 
 	//expense
 	GET_EXPENSE: '/get',
+	UPDATE_QUANTITY: '/update',
 };
 
 module.exports = url;

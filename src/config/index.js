@@ -7,18 +7,17 @@ module.exports = {
 	jwtKey:
 		'dhkjhfskfeodhkjhfskfeodhkjhfskfeodhkjhfskfeodhkiudfhgggs,nfsdkjhfskfeodhkjhfskfiudfhgggs,nfsdk',
 	connectDB: () => {
-		console.log('add conn deb function');
-		// mongoose
-		// 	.connect(urlConstants.DB_URL, {
-		// 		useNewUrlParser: true,
-		// 		useUnifiedTopology: true,
-		// 	})
-		// 	.then(() => {
-		// 		console.log('Database is connected');
-		// 	})
-		// 	.catch((err) => {
-		// 		console.log({ err });
-		// 		process.exit(1);
-		// 	});
+		mongoose
+			.connect(urlConstants.DB_URL, {
+				useNewUrlParser: true,
+				useUnifiedTopology: true,
+			})
+			.then(() => {
+				console.log('Database is connected');
+			})
+			.catch((err) => {
+				console.log({ err });
+				process.exit(1);
+			});
 	},
 };

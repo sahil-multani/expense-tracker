@@ -6,4 +6,8 @@ const getExpenseController = async (req, res) => {
 	res.send(response);
 };
 
-module.exports = { getExpenseController };
+const updateLaundryQuantityController = async (req, res) => {
+	let response = await expenseService.updateLaundryQuantityService(req.body);
+	res.send(response);
+};
+module.exports = { getExpenseController, updateLaundryQuantityController };

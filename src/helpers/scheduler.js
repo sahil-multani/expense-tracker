@@ -1,32 +1,25 @@
 const expenseModel = require('../model/expenseModel');
 const cron = require('node-cron');
+const _ = require('lodash');
+const userModel = require('../model/userModel');
 const createDailyExpense = () => {
-	expenseModel.find(async (err, expenseDocs) => {
-		expenseDocs.forEach(async (expenseDoc) => {
-			expenseDoc.expense.push({
-				laundry: { quantity: 0, cost: 0 },
-				breakFast: true,
-				lunch: true,
-				dinner: true,
-			});
-
-			await expenseDoc.save((err, doc) => {
-				if (err) return console.log(err);
-				// console.log(doc);
+	userModel.find(function (err, doc) {
+		if (err) return console.log('error while scheduling ');
+		doc.forEach((user) => {
+			let expense = new expenseModel({ userId: user._id });
+			expense.save((err, expenseDoc) => {
+				if (err) return console.log('save error');
+				console.log(expenseDoc);
 			});
 		});
-		// console.log(expenseDocs);
-		return;
 	});
 };
 
 const scheduleCreateExpenses = () => {
 	console.log('scheduler config set to call at 00:00');
 	cron.schedule('59 23 * * *', () => {
-		console.log('everyday at 00:00');
 		createDailyExpense();
 	});
 };
-createDailyExpense();
 
 scheduleCreateExpenses();

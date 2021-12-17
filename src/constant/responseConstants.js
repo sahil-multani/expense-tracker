@@ -23,4 +23,9 @@ module.exports = {
 		statusCode: 401,
 		msg: 'invalid auth token',
 	},
+	notFound: {
+		success: false,
+		statusCode: 404,
+		msg: 'not found',
+	},
 };

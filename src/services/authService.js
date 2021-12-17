@@ -30,7 +30,8 @@ const signUpService = (body) => {
 					userId: doc._id,
 					expense: [
 						{
-							laundry: { quantity: 0, cost: 0 },
+							laundry: 0,
+							cost: 0,
 							breakFast: true,
 							lunch: true,
 							dinner: true,

@@ -9,4 +9,9 @@ router.get(
 	middleware,
 	expenseController.getExpenseController,
 );
+router.post(
+	func.url.UPDATE_QUANTITY,
+	middleware,
+	expenseController.updateLaundryQuantityController,
+);
 module.exports = router;
