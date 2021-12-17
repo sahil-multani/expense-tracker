@@ -16,7 +16,7 @@ const getExpenseService = (body) => {
 			[
 				{
 					$match: {
-						userId: new ObjectId(userId),
+						userId: userId,
 					},
 				},
 				{
@@ -40,12 +40,22 @@ const getExpenseService = (body) => {
 
 const updateLaundryQuantityService = (body) => {
 	return new Promise(async (resolve) => {
-		expenseModel.findOneAndUpdate(
-			{ 'user.id': body.userId },
+		if (!body.id) {
+			errRes['data'] = [{ id: 'id is required' }];
+			return resolve(errRes);
+		}
+		let { quantity, id } = body;
+		if (quantity) {
+			body['cost'] = quantity * 15;
+		}
+
+		expenseModel.findByIdAndUpdate(
+			id,
+			{ ...body },
 			{ new: true },
-			(err) => {
+			(err, doc) => {
 				if (err) return resolve(err);
-				return resolve(succRes);
+				return resolve(res);
 			},
 		);
 	});

@@ -28,15 +28,6 @@ const signUpService = (body) => {
 				}
 				const expense = new expenseModel({
 					userId: doc._id,
-					expense: [
-						{
-							laundry: 0,
-							cost: 0,
-							breakFast: true,
-							lunch: true,
-							dinner: true,
-						},
-					],
 				});
 
 				expense.save((err, expenseDoc) => {
@@ -61,6 +52,7 @@ const loginService = (body) => {
 			if (err) {
 				return resolve(errRes);
 			}
+			if (!doc) return resolve(errRes);
 			const isMatch = bycrypt.compareSync(password, doc.password);
 			if (!isMatch) {
 				errRes['msg'] = 'invalid credentials';
