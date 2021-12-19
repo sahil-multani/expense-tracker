@@ -8,6 +8,7 @@ const errRes = _.cloneDeep(func.badRequest);
 const succRes = _.cloneDeep(func.created);
 const jwt = require('jsonwebtoken');
 const expenseModel = require('../model/expenseModel');
+
 const signUpService = (body) => {
 	return new Promise(async (resolve, reject) => {
 		let newUser = new userModel(body);
@@ -26,13 +27,25 @@ const signUpService = (body) => {
 
 					return resolve(func.serverError);
 				}
-				const expense = new expenseModel({
-					userId: doc._id,
-				});
+				// const expense = new expenseModel({
+				// 	userId: doc._id,
+				// });
 
 				expense.save((err, expenseDoc) => {
 					if (err) return resolve(err);
-					return resolve(expenseDoc);
+					let successRes = _.cloneDeep(func.created);
+					let { email, firstName, lastName, profile, verified, _id: id } = doc;
+					successRes['data'] = [
+						{
+							email,
+							firstName,
+							lastName,
+							profile,
+							verified,
+							id,
+						},
+					];
+					return resolve(successRes);
 				});
 				// return resolve(succRes);
 			});

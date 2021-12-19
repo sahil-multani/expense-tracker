@@ -9,6 +9,8 @@ const userSchema = new Schema({
 	isDeleted: { type: Boolean, default: false },
 	createdAt: { type: String, default: Date.now },
 	updatedAt: { type: String, default: Date.now },
+	profile: { type: String, default: '' },
+	verified: { type: Boolean, default: false },
 });
 
 const userModel = mongoose.model('user', userSchema);

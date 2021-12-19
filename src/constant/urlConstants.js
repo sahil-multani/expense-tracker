@@ -9,6 +9,9 @@ const url = {
 	//expense
 	GET_EXPENSE: '/get',
 	UPDATE_QUANTITY: '/update',
+
+	//mail
+	SEND_MAIL: '/send',
 };
 
 module.exports = url;
