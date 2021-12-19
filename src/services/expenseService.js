@@ -6,6 +6,7 @@ const errRes = _.cloneDeep(func.response.badRequest);
 const succRes = _.cloneDeep(func.response.sucess);
 const serverErr = _.cloneDeep(func.response.serverError);
 const notFound = _.cloneDeep(func.response.notFound);
+const ok = _.cloneDeep(func.response.created);
 const { ObjectId } = require('bson');
 const getExpenseService = (body) => {
 	return new Promise(async (resolve) => {
@@ -55,7 +56,7 @@ const updateLaundryQuantityService = (body) => {
 			{ new: true },
 			(err, doc) => {
 				if (err) return resolve(err);
-				return resolve(res);
+				return resolve(ok);
 			},
 		);
 	});
