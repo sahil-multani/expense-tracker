@@ -17,9 +17,28 @@ const createDailyExpense = () => {
 
 const scheduleCreateExpenses = () => {
 	console.log('scheduler config set to call at 00:00');
-	cron.schedule('0 1 * * *', () => {
-		createDailyExpense();
+	cron.schedule('00 00 12 * * 0-6', () => {
+		// createDailyExpense();
+		console.log('1111111');
 	});
 };
 
 scheduleCreateExpenses();
+
+var CronJob = require('cron').CronJob;
+var job = new CronJob(
+	'00 00 12 * * 0-6',
+	function () {
+		createDailyExpense();
+		/*
+		 * Runs every day
+		 * at 12:00:00 AM.
+		 */
+	},
+	function () {
+		/* This function is executed when the job stops */
+	},
+	true /* Start the job right now */,
+);
+
+job.start();
