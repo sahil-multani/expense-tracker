@@ -19,7 +19,10 @@ const scheduleCreateExpenses = () => {
 	console.log('scheduler config set to call at 00:00');
 	cron.schedule('0 0 * * *', () => {
 		createDailyExpense();
-	});
+	},{
+    scheduled: true,
+    timezone: "Asia/Kolkata"
+  });
 };
 
 scheduleCreateExpenses();
