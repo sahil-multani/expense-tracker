@@ -21,7 +21,7 @@ app.use('/auth', auth);
 app.use('/expense', expense);
 app.use('/mail', mail);
 const port = process.env.PORT || 3001;
-
+ app.get("/"(r,rs)=>{res.send("hello")})
 app.listen(port, () => {
 	console.log('Server running on port', port);
 });
