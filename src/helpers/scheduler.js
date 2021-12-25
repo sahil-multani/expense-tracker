@@ -19,8 +19,6 @@ const scheduleCreateExpenses = () => {
 	console.log('scheduler config set to call at 00:00');
 	cron.schedule('0 0 * * *', () => {
 		createDailyExpense();
-
-		console.log('day changed!!!!!!!!');
 	});
 };
 

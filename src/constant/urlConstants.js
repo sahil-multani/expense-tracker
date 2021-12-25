@@ -12,6 +12,7 @@ const url = {
 
 	//mail
 	SEND_MAIL: '/send',
+	VERIFY_MAIL: '/verify/:token',
 };
 
 module.exports = url;

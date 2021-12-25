@@ -27,4 +27,23 @@ const sendMailService = (body) => {
 	});
 };
 
-module.exports = { sendMailService };
+const verifyMailService = (req) => {
+	return new Promise(async (resolve) => {
+		let token = req.params.token;
+		jwt.verify(token, func.jwtKey, (error, decoded) => {
+			if (error) {
+				let errorRes = _.cloneDeep(func.response.badRequest);
+				return resolve(errorRes);
+			}
+			userModel.findOneAndUpdate(
+				{ email: decoded.email },
+				{ verified: true },
+				(err, doc) => {
+					return resolve({ err, doc });
+				},
+			);
+		});
+	});
+};
+
+module.exports = { sendMailService, verifyMailService };
