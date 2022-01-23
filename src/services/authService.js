@@ -31,7 +31,7 @@ const signUpService = (body) => {
 				// 	userId: doc._id,
 				// });
 
-				expense.save((err, expenseDoc) => {
+				expenseModel.save((err, expenseDoc) => {
 					if (err) return resolve(err);
 					let successRes = _.cloneDeep(func.created);
 					let { email, firstName, lastName, profile, verified, _id: id } = doc;
